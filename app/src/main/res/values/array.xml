@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="name_note_res">
+        <item>Первая заметка</item>
+        <item>Second note</item>
+        <item>Третья заметка</item>
+        <item>Бег ?</item>
+    </string-array>
+
+    <string-array name="content_note_res">
+        <item>Я сегодня иду бегать целый день</item>
+        <item>Воу воу, еда</item>
+        <item>Оп оп, а это 3 заметка</item>
+        <item>Юпи, оно робит</item>
+    </string-array>
+
+    <string-array name="data_note_res"> <!-- String array, тк в Integer array нельзя хранить символы, а мне нужно хранить дату по типу 25.03.21-->
+        <item>12.08.21</item>
+        <item>14.04.21</item>
+        <item>15.03.21</item>
+        <item>16.02.21</item>
+    </string-array>
+</resources>
