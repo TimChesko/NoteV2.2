@@ -46,8 +46,6 @@ public class SettingsFragment extends Fragment {
         radioButtonReplace.setChecked(settings.getReplaceFragment());
         radioButtonAdd.setChecked(settings.getAddFragment());
 
-        radioButtonReplace.setChecked(true);
-
         radioButtonAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

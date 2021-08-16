@@ -19,19 +19,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/radioButtonAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/add"/>
-        <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radioButtonReplace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/replace"/>
-
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radioButtonAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/add"/>
     </RadioGroup>
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchBackAsRemove"
         android:layout_width="match_parent"

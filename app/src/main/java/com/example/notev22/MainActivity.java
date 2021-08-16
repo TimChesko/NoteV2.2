@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDrawer(Toolbar toolbar) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        // связываем   drawerLayout toolbar
+
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,toolbar,R.string.add,R.string.app_name);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);

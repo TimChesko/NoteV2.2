@@ -7,16 +7,4 @@
         android:title="@string/settings"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/action_main"
-        android:title="main"
-        app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/action_favorite"
-        android:icon="@android:drawable/star_on"
-        android:title="favorite"
-        app:showAsAction="always"/>
-
-
 </menu>
