@@ -22,9 +22,6 @@ public class SettingsFragment extends Fragment {
 
     RadioButton radioButtonAdd;
     RadioButton radioButtonReplace;
-    /*SwitchCompat switchBackStack;
-    SwitchCompat switchBackAsRemove;
-    SwitchCompat switchDeleteBeforeAdd;*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +43,9 @@ public class SettingsFragment extends Fragment {
         switchBackStack.setChecked(com.example.notev22.Settings.isBackStack);
         radioButtonReplace.setChecked(com.example.notev22.Settings.isReplaceFragment);
         radioButtonAdd.setChecked(com.example.notev22.Settings.isAddFragment);
+
+        radioButtonReplace.setChecked(true);//сделал кнопкой по умолчанию
+
         radioButtonAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -53,6 +53,7 @@ public class SettingsFragment extends Fragment {
                 writeSettings();
             }
         });
+
         radioButtonReplace.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -23,13 +23,12 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
         readSettings();
         initToolbar();
         initDrawer(initToolbar());
@@ -99,47 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         com.example.notev22.Settings.isBackIsRemove = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_BACK_IS_REMOVE_FRAGMENT, false);
         com.example.notev22.Settings.isBackStack = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_BACK_STACK_USED, false);
         com.example.notev22.Settings.isReplaceFragment = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_REPLACE_FRAGMENT_USED, false);
-        com.example.notev22.Settings.isAddFragment = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_ADD_FRAGMENT_USED, false);
-    }
-
-    private void initView() {
-        Button buttonBack = findViewById(R.id.buttonBack);
-        Button buttonMain = findViewById(R.id.buttonMain);
-        Button buttonFavorite = findViewById(R.id.buttonFavorite);
-        Button buttonSettings = findViewById(R.id.buttonSettings);
-
-        buttonBack.setOnClickListener(this);
-        buttonMain.setOnClickListener(this);
-        buttonFavorite.setOnClickListener(this);
-        buttonSettings.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.buttonBack:
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                if(fragmentManager.getFragments().size()<=1) break;
-                if( com.example.notev22.Settings.isBackIsRemove){
-                    Fragment fragmentForDelete = getVisibleFragment(fragmentManager);
-                    if(fragmentForDelete!=null){
-                        fragmentManager.beginTransaction().remove(fragmentForDelete).commit();
-                    }
-                }else {
-                    fragmentManager.popBackStack();
-                }
-                break;
-            case R.id.buttonMain:
-                showFragment(MainFragment.newInstance());
-                break;
-            case R.id.buttonFavorite:
-                showFragment(com.example.notev22.FavoriteFragment.newInstance());
-                break;
-            case R.id.buttonSettings:
-                showFragment(SettingsFragment.newInstance());
-                break;
-
-        }
+        com.example.notev22.Settings.isAddFragment = !com.example.notev22.Settings.isReplaceFragment;
     }
 
     Fragment getVisibleFragment(FragmentManager fragmentManager) {
@@ -168,7 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (com.example.notev22.Settings.isAddFragment) {
             fragmentTransaction
                     .add(R.id.fragment_container, fragment);
-        } else if (com.example.notev22.Settings.isReplaceFragment) {
+        }
+
+        if (com.example.notev22.Settings.isReplaceFragment) {
             fragmentTransaction
                     .replace(R.id.fragment_container, fragment);
         }
