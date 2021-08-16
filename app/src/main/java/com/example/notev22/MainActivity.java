@@ -25,6 +25,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Settings settings = new Settings();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void readSettings() {
         SharedPreferences sharedPreferences = getSharedPreferences(com.example.notev22.Settings.SHARED_FILE_NAME, Context.MODE_PRIVATE);
-        com.example.notev22.Settings.isDeleteFragment = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_DELETE_FRAGMENT_BEFORE_ADD, false);
-        com.example.notev22.Settings.isBackIsRemove = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_BACK_IS_REMOVE_FRAGMENT, false);
-        com.example.notev22.Settings.isBackStack = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_BACK_STACK_USED, false);
-        com.example.notev22.Settings.isReplaceFragment = sharedPreferences.getBoolean(com.example.notev22.Settings.IS_REPLACE_FRAGMENT_USED, false);
-        com.example.notev22.Settings.isAddFragment = !com.example.notev22.Settings.isReplaceFragment;
+
+        settings.setDeleteFragment(sharedPreferences.getBoolean(Settings.IS_DELETE_FRAGMENT_BEFORE_ADD, false));
+        settings.setBackIsRemove(sharedPreferences.getBoolean(Settings.IS_BACK_IS_REMOVE_FRAGMENT, false));
+        settings.setBackStack(sharedPreferences.getBoolean(Settings.IS_BACK_STACK_USED, false));
+        settings.setReplaceFragment(sharedPreferences.getBoolean(Settings.IS_REPLACE_FRAGMENT_USED, false));
+        settings.setAddFragment(!sharedPreferences.getBoolean(Settings.IS_REPLACE_FRAGMENT_USED, false));
     }
 
     Fragment getVisibleFragment(FragmentManager fragmentManager) {
@@ -117,28 +120,31 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        if (com.example.notev22.Settings.isDeleteFragment) {
+        if (settings.getDeleteFragment()) {
             Fragment fragmentForDelete = getVisibleFragment(fragmentManager);
             if (fragmentForDelete != null) {
                 fragmentTransaction.remove(fragmentForDelete);
             }
         }
 
-        if (com.example.notev22.Settings.isAddFragment) {
+        if (settings.getAddFragment()) {
             fragmentTransaction
                     .add(R.id.fragment_container, fragment);
         }
 
-        if (com.example.notev22.Settings.isReplaceFragment) {
+        if (settings.getReplaceFragment()) {
             fragmentTransaction
                     .replace(R.id.fragment_container, fragment);
         }
 
-        if(com.example.notev22.Settings.isBackStack){
+        if(settings.getBackStack()){
             fragmentTransaction.addToBackStack("");
         }
 
         fragmentTransaction.commit();
+    }
 
+    public Settings getSettings() {
+        return settings;
     }
 }
